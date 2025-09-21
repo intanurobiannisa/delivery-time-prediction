@@ -32,16 +32,27 @@ joblib
 # 📁 Project Structure
 
 delivery-time-prediction/
+
 ├── data/
+
 │   ├── train.csv
+
 │   ├── test.csv
+
 │   └── best_model.pkl
+
 ├── scalers/
+
 │   ├── Distance_km_scaler.pkl
+
 │   ├── Preparation_Time_min_scaler.pkl
+
 │   └── Courier_Experience_yrs_scaler.pkl
+
 ├── streamlit_app.py
+
 ├── requirements.txt
+
 └── README.md
 
 # ⚙️ Setup Instructions
@@ -67,7 +78,7 @@ bash
 streamlit run streamlit_app.py
 ```
 
-#📌 How It Works
+# 📌 How It Works
 
 Users input:
 
