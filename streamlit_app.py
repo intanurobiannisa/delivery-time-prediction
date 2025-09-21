@@ -2,16 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-# import matplotlib.pyplot as plt
-# from sklearn.preprocessing import StandardScaler
 
 # Load trained model (SVM)
 model = joblib.load('data/best_model.pkl')
-
-# Load SHAP explainer
-# X_train = pd.read_csv("data/X_train.csv")
-# feature_data_sample = X_train[np.random.choice(X_train.shape[0], 100, replace=False)]
-# explainer = shap.Explainer(model.predict_proba, feature_data_sample)  # Use KernelExplainer if needed
 
 # Streamlit UI
 st.title("🛍️📦 Courier Delivery Time Prediction")
@@ -68,34 +61,22 @@ input_df['Preparation_Time_min'] = Preparation_Time_min_scaler.transform(input_d
 Courier_Experience_yrs_scaler = joblib.load('data/Courier_Experience_yrs_scaler.pkl')
 input_df['Courier_Experience_yrs'] = Courier_Experience_yrs_scaler.transform(input_df[['Courier_Experience_yrs']])
 
-# scaler = joblib.load("data/scaler.pkl")
-# # Select and scale the expected columns
-# col_to_scale = ['Courier_Experience_yrs', 'Distance_km', 'Preparation_Time_min']
-# input_df[col_to_scale] = scaler.transform(input_df[col_to_scale])
-
 # Wait for user to click before predicting
 if st.button("Predict Delivery Time"):
     # Predict
     prediction = model.predict(input_df)[0]
     st.success(f"Estimated Delivery Time: {prediction:.2f} minutes")
 
-    # # Map prediction to label
-    # stress_map = {0: "No Stress", 1: "Eustress", 2: "Distress"}
-    # st.subheader(f"🧠 Predicted Stress Type: **{stress_map[prediction]}**")
+    feature_names = ['Distance_km', 'Weather', "Traffic_Level", "Time_of_Day", "Vehicle_Type", "Preparation_Time_min", "Courier_Experience_yrs"]
+    # Get coefficients
+    coefficients = model.coef_
 
-    # # Show probabilities
-    # st.write("Prediction Confidence:")
-    # st.bar_chart(pd.Series(proba, index=[stress_map[i] for i in range(3)]))
+    # Create a DataFrame for display
+    coef_df = pd.DataFrame({
+        'Feature': feature_names,
+        'Coefficient': coefficients
+    }).sort_values(by='Coefficient', ascending=False)
 
-    # # Tailored recommendations
-    # st.subheader("🎯 Recommended Interventions")
-    # if prediction == 2:
-    #     st.markdown("- Connect with a counselor or mental health professional")
-    #     st.markdown("- Prioritize sleep and relaxation routines")
-    #     st.markdown("- Seek academic support for workload management")
-    # elif prediction == 1:
-    #     st.markdown("- Maintain healthy stress levels through time management")
-    #     st.markdown("- Use stress as motivation—keep tracking your goals")
-    # else:
-    #     st.markdown("- Keep up the good habits!")
-    #     st.markdown("- Stay socially connected and monitor for any changes")
+    # Display in Streamlit
+    st.subheader("📊 Model Coefficients")
+    st.dataframe(coef_df)
