@@ -79,4 +79,4 @@ if st.button("Predict Delivery Time"):
 
     # Display in Streamlit
     st.subheader("📊 Model Coefficients")
-    st.dataframe(coef_df)
+    st.dataframe(coef_df, hide_index=True)
