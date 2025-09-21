@@ -49,7 +49,7 @@ input_df = pd.DataFrame([user_input], columns=['Distance_km', 'Weather', "Traffi
 
 # Display input summary
 st.subheader("📋 Your Input Summary")
-st.dataframe(input_df)
+st.dataframe(input_df, hide_index=True)
 
 # Scale if needed
 Distance_km_scaler = joblib.load('data/Distance_km_scaler.pkl')
