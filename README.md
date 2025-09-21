@@ -1,8 +1,12 @@
-📦 Delivery Time Prediction App
+# 📦 Delivery Time Prediction App
+
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://courier-delivery-time-prediction.streamlit.app)
+
 This project is a machine learning-powered web app built with Streamlit that predicts delivery time based on key logistics features like distance, preparation time, and courier experience.
 
-🚀 Features
+
+# 🚀 Features
+
 📊 Predict delivery time using a trained regression model (ElasticNet)
 
 📉 Scales input features using MinMaxScaler
@@ -11,7 +15,9 @@ This project is a machine learning-powered web app built with Streamlit that pre
 
 🖥️ Interactive UI with real-time predictions
 
-🧪 Tech Stack
+
+# 🧪 Tech Stack
+
 Python 3.11
 
 Streamlit
@@ -22,8 +28,9 @@ pandas
 
 joblib
 
-📁 Project Structure
-Code
+
+# 📁 Project Structure
+
 delivery-time-prediction/
 ├── data/
 │   ├── train.csv
@@ -36,37 +43,47 @@ delivery-time-prediction/
 ├── streamlit_app.py
 ├── requirements.txt
 └── README.md
-⚙️ Setup Instructions
+
+# ⚙️ Setup Instructions
+
 Clone the repo
 
 bash
+```
 git clone https://github.com/intanurobiannisa/delivery-time-prediction.git
+
 cd delivery-time-prediction
+
 Install dependencies
-
+```
 bash
+```
 pip install -r requirements.txt
+
 Run the app
-
+```
 bash
+```
 streamlit run streamlit_app.py
+```
 
-📌 How It Works
+#📌 How It Works
+
 Users input:
 
-Distance: The delivery distance in kilometers.
-
-Weather: Weather conditions during the delivery, including Clear, Rainy, Snowy, Foggy, and Windy.
-
-Traffic Level: Traffic conditions categorized as Low, Medium, or High.
-
-Time of Day: The time when the delivery took place, categorized as Morning, Afternoon, Evening, or Night.
-
-Vehicle Type: Type of vehicle used for delivery, including Bike, Scooter, and Car.
-
-Preparation Time: The time required to prepare the order, measured in minutes.
-
-Courier Experience: Experience of the courier in years.
+  Distance: The delivery distance in kilometers.
+  
+  Weather: Weather conditions during the delivery, including Clear, Rainy, Snowy, Foggy, and Windy.
+  
+  Traffic Level: Traffic conditions categorized as Low, Medium, or High.
+  
+  Time of Day: The time when the delivery took place, categorized as Morning, Afternoon, Evening, or Night.
+  
+  Vehicle Type: Type of vehicle used for delivery, including Bike, Scooter, and Car.
+  
+  Preparation Time: The time required to prepare the order, measured in minutes.
+  
+  Courier Experience: Experience of the courier in years.
 
 Inputs are scaled using pre-trained scalers
 
@@ -74,7 +91,8 @@ Model predicts delivery time in minutes
 
 Coefficients are displayed to explain feature impact
 
-📈 Model Details
+# 📈 Model Details
+
 Type: ElasticNet Regression
 
 Target: Delivery Time (minutes)
@@ -82,6 +100,14 @@ Target: Delivery Time (minutes)
 Training Features:
 
 Distance_km
+
+Weather
+
+Traffic_Level
+
+Time_of_Day
+
+Vehicle_Type
 
 Preparation_Time_min
 
