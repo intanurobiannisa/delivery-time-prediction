@@ -45,7 +45,7 @@ Vehicle_Type_ = st.selectbox("Select the Type of vehicle used for delivery:", ["
 Vehicle_Type = 0 if Vehicle_Type_ == "Bike" else 1 if Vehicle_Type_ == "Car" else 2
 user_input.append(Vehicle_Type)
 
-Preparation_Time_min = st.number_input("Enter the Time required to prepare the order (in minutes):", min_value=0, max_value=100, value=50)
+Preparation_Time_min = st.number_input("Enter the Time required to prepare the order (in minutes):", min_value=0, max_value=100, value=10)
 user_input.append(Preparation_Time_min)
 
 Courier_Experience_yrs = st.number_input("Enter your Experience as a courier (in years):", min_value=0, max_value=100, value=5)
@@ -59,34 +59,43 @@ st.subheader("📋 Your Input Summary")
 st.dataframe(input_df)
 
 # Scale if needed
-scaler = joblib.load('data/scaler.pkl')
-input_df['Distance_km'] = scaler.transform(input_df[['Distance_km']])
-input_df['Preparation_Time_min'] = scaler.transform(input_df[['Preparation_Time_min']])
-input_df['Courier_Experience_yrs'] = scaler.transform(input_df[['Courier_Experience_yrs']])
+Distance_km_scaler = joblib.load('data/Distance_km_scaler.pkl')
+input_df['Distance_km'] = Distance_km_scaler.transform(input_df[['Distance_km']])
+
+Preparation_Time_min_scaler = joblib.load('data/Preparation_Time_min_scaler.pkl')
+input_df['Preparation_Time_min'] = Preparation_Time_min_scaler.transform(input_df[['Preparation_Time_min']])
+
+Courier_Experience_yrs_scaler = joblib.load('data/Courier_Experience_yrs_scaler.pkl')
+input_df['Courier_Experience_yrs'] = Courier_Experience_yrs_scaler.transform(input_df[['Courier_Experience_yrs']])
+
+# scaler = joblib.load("data/scaler.pkl")
+# # Select and scale the expected columns
+# col_to_scale = ['Courier_Experience_yrs', 'Distance_km', 'Preparation_Time_min']
+# input_df[col_to_scale] = scaler.transform(input_df[col_to_scale])
 
 # Wait for user to click before predicting
 if st.button("Predict Delivery Time"):
     # Predict
     prediction = model.predict(input_df)[0]
-    proba = model.predict_proba(input_df)[0]
+    st.success(f"Estimated Delivery Time: {prediction:.2f} minutes")
 
-    # Map prediction to label
-    stress_map = {0: "No Stress", 1: "Eustress", 2: "Distress"}
-    st.subheader(f"🧠 Predicted Stress Type: **{stress_map[prediction]}**")
+    # # Map prediction to label
+    # stress_map = {0: "No Stress", 1: "Eustress", 2: "Distress"}
+    # st.subheader(f"🧠 Predicted Stress Type: **{stress_map[prediction]}**")
 
-    # Show probabilities
-    st.write("Prediction Confidence:")
-    st.bar_chart(pd.Series(proba, index=[stress_map[i] for i in range(3)]))
+    # # Show probabilities
+    # st.write("Prediction Confidence:")
+    # st.bar_chart(pd.Series(proba, index=[stress_map[i] for i in range(3)]))
 
-    # Tailored recommendations
-    st.subheader("🎯 Recommended Interventions")
-    if prediction == 2:
-        st.markdown("- Connect with a counselor or mental health professional")
-        st.markdown("- Prioritize sleep and relaxation routines")
-        st.markdown("- Seek academic support for workload management")
-    elif prediction == 1:
-        st.markdown("- Maintain healthy stress levels through time management")
-        st.markdown("- Use stress as motivation—keep tracking your goals")
-    else:
-        st.markdown("- Keep up the good habits!")
-        st.markdown("- Stay socially connected and monitor for any changes")
+    # # Tailored recommendations
+    # st.subheader("🎯 Recommended Interventions")
+    # if prediction == 2:
+    #     st.markdown("- Connect with a counselor or mental health professional")
+    #     st.markdown("- Prioritize sleep and relaxation routines")
+    #     st.markdown("- Seek academic support for workload management")
+    # elif prediction == 1:
+    #     st.markdown("- Maintain healthy stress levels through time management")
+    #     st.markdown("- Use stress as motivation—keep tracking your goals")
+    # else:
+    #     st.markdown("- Keep up the good habits!")
+    #     st.markdown("- Stay socially connected and monitor for any changes")
