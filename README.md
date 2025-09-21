@@ -64,9 +64,10 @@ bash
 git clone https://github.com/intanurobiannisa/delivery-time-prediction.git
 
 cd delivery-time-prediction
+```
 
 Install dependencies
-```
+
 bash
 ```
 pip install -r requirements.txt
@@ -82,19 +83,19 @@ streamlit run streamlit_app.py
 
 Users input:
 
-  Distance: The delivery distance in kilometers.
+1. Distance: The delivery distance in kilometers.
+
+2. Weather: Weather conditions during the delivery, including Clear, Rainy, Snowy, Foggy, and Windy.
   
-  Weather: Weather conditions during the delivery, including Clear, Rainy, Snowy, Foggy, and Windy.
+3.  Traffic Level: Traffic conditions categorized as Low, Medium, or High.
   
-  Traffic Level: Traffic conditions categorized as Low, Medium, or High.
+4.  Time of Day: The time when the delivery took place, categorized as Morning, Afternoon, Evening, or Night.
   
-  Time of Day: The time when the delivery took place, categorized as Morning, Afternoon, Evening, or Night.
+5.  Vehicle Type: Type of vehicle used for delivery, including Bike, Scooter, and Car.
   
-  Vehicle Type: Type of vehicle used for delivery, including Bike, Scooter, and Car.
+6.  Preparation Time: The time required to prepare the order, measured in minutes.
   
-  Preparation Time: The time required to prepare the order, measured in minutes.
-  
-  Courier Experience: Experience of the courier in years.
+7.  Courier Experience: Experience of the courier in years.
 
 Inputs are scaled using pre-trained scalers
 
@@ -110,19 +111,19 @@ Target: Delivery Time (minutes)
 
 Training Features:
 
-Distance_km
+1. Distance_km
 
-Weather
+2. Weather
 
-Traffic_Level
+3. Traffic_Level
 
-Time_of_Day
+4. Time_of_Day
 
-Vehicle_Type
+5. Vehicle_Type
 
-Preparation_Time_min
+6. Preparation_Time_min
 
-Courier_Experience_yrs
+7. Courier_Experience_yrs
 
 # 🙋‍♀️ Author
 
