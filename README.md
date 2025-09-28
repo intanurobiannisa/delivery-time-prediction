@@ -7,7 +7,7 @@ This project is a machine learning-powered web app built with Streamlit that pre
 
 # 🚀 Features
 
-📊 Predict delivery time using a trained regression model (ElasticNet)
+📊 Predict delivery time using a trained regression model (Ridge Regression)
 
 📉 Scales input features using MinMaxScaler
 
@@ -124,6 +124,8 @@ Training Features:
 6. Preparation_Time_min
 
 7. Courier_Experience_yrs
+
+8. Bad_Weather
 
 # 🙋‍♀️ Author
 
