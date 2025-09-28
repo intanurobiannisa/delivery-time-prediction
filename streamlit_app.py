@@ -44,8 +44,11 @@ user_input.append(Preparation_Time_min)
 Courier_Experience_yrs = st.number_input("Enter your Experience as a courier (in years):", min_value=0, max_value=100, value=5)
 user_input.append(Courier_Experience_yrs)
 
+Bad_Weather = 1 if Weather_ in ['Rainy', 'Snowy', 'Foggy'] else 0
+user_input.append(Bad_Weather)
+
 # Convert to DataFrame
-input_df = pd.DataFrame([user_input], columns=['Distance_km', 'Weather', "Traffic_Level", "Time_of_Day", "Vehicle_Type", "Preparation_Time_min", "Courier_Experience_yrs"])
+input_df = pd.DataFrame([user_input], columns=['Distance_km', 'Weather', "Traffic_Level", "Time_of_Day", "Vehicle_Type", "Preparation_Time_min", "Courier_Experience_yrs", 'Bad_Weather'])
 
 # Display input summary
 st.subheader("📋 Your Input Summary")
@@ -67,7 +70,7 @@ if st.button("Predict Delivery Time"):
     prediction = model.predict(input_df)[0]
     st.success(f"Estimated Delivery Time: {prediction:.2f} minutes")
 
-    feature_names = ['Distance_km', 'Weather', "Traffic_Level", "Time_of_Day", "Vehicle_Type", "Preparation_Time_min", "Courier_Experience_yrs"]
+    feature_names = ['Distance_km', 'Weather', "Traffic_Level", "Time_of_Day", "Vehicle_Type", "Preparation_Time_min", "Courier_Experience_yrs", 'Bad_Weather']
     # Get coefficients
     coefficients = model.coef_
 
